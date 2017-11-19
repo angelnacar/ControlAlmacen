@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  * 
@@ -19,13 +20,14 @@ public class Salida {
     private static String descripcion;
     private String altura,ancho,largo;
     
-    public Salida()
+    public Salida() 
     {
-        fichero = new File("C:\\Users\\Angel\\Documents\\NetBeansProjects\\ProyectoTrimestre\\src\\Datos\\productos.dat");
+        fichero = new File("/home/angel/NetBeansProjects/ControlAlmacen/src/Datos/productos.dat");
         try {
             acceso = new RandomAccessFile(fichero,"r");
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(Salida.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane aviso = new JOptionPane();
+            JOptionPane.showMessageDialog(aviso, "NO ENCUENTRA EL ARCHIVO", "Aviso", JOptionPane.ERROR_MESSAGE);
         }
     }
     
@@ -33,13 +35,13 @@ public class Salida {
     {
        
         
-        char aux,aux2,aux3;
+        char aux,aux2,aux3,aux4;
         char nombre[] = new char[20];
         char alt[] = new char[4];
         char an[] = new char[4];
         char lar[] = new char[4];
         
-        acceso.seek(n);
+        acceso.seek(n*64);
         for(int i = 0;i<nombre.length;i++) //almacena nombre
             {
             aux = acceso.readChar();
@@ -48,15 +50,47 @@ public class Salida {
         for(int k = 0;k<alt.length;k++)
         {
             aux2 = acceso.readChar();
-            alt[k] = aux2;
+            lar[k] = aux2;
         }
-        altura = new String(alt);
+        
+        for(int m = 0;m<alt.length;m++)
+        {
+            aux3 = acceso.readChar();
+            an[m] = aux3;
+        }
+        
+        for(int z = 0;z<alt.length;z++)
+        {
+            aux4 = acceso.readChar();
+            alt[z] = aux4;
+        }
+        
         descripcion = new String(nombre);
+        altura = new String(alt);
+        ancho = new String(an);
+        largo = new String(lar);
+        
         return descripcion;
    }
     public String altura()
     {
         return altura;
+    }
+    
+    public String anchura()
+    {
+        return ancho;
+    }
+    
+    public String largura()
+    {
+        return largo;
+    }
+    public String[] toArrayString()
+    {
+        String[] s = {descripcion,largo,ancho,altura};
+        
+        return (s); //Por la pagina 4 me quedo
     }
     
     

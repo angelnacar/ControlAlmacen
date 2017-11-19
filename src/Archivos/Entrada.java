@@ -30,7 +30,7 @@ public class Entrada{
     public Entrada(String descripcion,String largo,String ancho, String altura)
     {
         
-        fichero = new File("C:\\Users\\Angel\\Documents\\NetBeansProjects\\ProyectoTrimestre\\src\\Datos\\productos.dat"); //ruta al archivo, cambia según la máquina
+        fichero = new File("/home/angel/NetBeansProjects/ControlAlmacen/src/Datos/productos.dat"); //ruta al archivo, cambia según la máquina
         this.descripcion = descripcion;
         this.largo = largo;
         this.ancho = ancho;
