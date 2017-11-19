@@ -22,15 +22,15 @@ public class Entrada{
     private static File fichero;
     private static RandomAccessFile acceso;
     private static int id, posicion, fin = 0;
-    private static int largo,ancho,altura;
+    private static String largo,ancho,altura;
     private static String descripcion;
     private static StringBuffer des,lar,an,al;
     
     
-    public Entrada(String descripcion,int largo,int ancho, int altura)
+    public Entrada(String descripcion,String largo,String ancho, String altura)
     {
         
-        fichero = new File("C:\\Users\\Angel\\Documents\\NetBeansProjects\\ProyectoTrimestre\\src\\Datos\\productos.dat");
+        fichero = new File("C:\\Users\\Angel\\Documents\\NetBeansProjects\\ProyectoTrimestre\\src\\Datos\\productos.dat"); //ruta al archivo, cambia según la máquina
         this.descripcion = descripcion;
         this.largo = largo;
         this.ancho = ancho;
@@ -50,10 +50,10 @@ public class Entrada{
             an.setLength(4);
             al.setLength(4);
             
-            acceso.writeChars(descripcion); //Inserta descripcion
-            acceso.writeInt(largo);
-            acceso.writeInt(ancho);
-            acceso.writeInt(altura);
+            acceso.writeChars(des.toString()); //Inserta descripcion
+            acceso.writeChars(lar.toString());
+            acceso.writeChars(an.toString());
+            acceso.writeChars(al.toString());
             
             
         } catch (FileNotFoundException ex) {

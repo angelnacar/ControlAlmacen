@@ -127,7 +127,7 @@ public class Productos extends javax.swing.JDialog {
     public static void Datos()
     {
         
-        entrada = new Archivos.Entrada(descripcion.getText(),Integer.parseInt(largo.getText()),Integer.parseInt(ancho.getText()),Integer.parseInt(altura.getText()));
+        entrada = new Archivos.Entrada(descripcion.getText(),largo.getText(),ancho.getText(),altura.getText());
     }
             
   
