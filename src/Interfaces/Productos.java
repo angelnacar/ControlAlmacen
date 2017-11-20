@@ -124,9 +124,11 @@ public class Productos extends javax.swing.JDialog {
         Datos();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    /**
+     * Instancia un objeto con los datos del producto
+     */
     public static void Datos()
     {
-        
         entrada = new Archivos.Entrada(descripcion.getText(),largo.getText(),ancho.getText(),altura.getText());
     }
             

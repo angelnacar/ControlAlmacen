@@ -30,7 +30,7 @@ public class Pedidos extends javax.swing.JDialog {
         }
      }catch(EOFException e)
      {
-         System.out.println(e.toString());
+         
 } 
     }
 
@@ -43,7 +43,7 @@ public class Pedidos extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         eleccion = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        cantidad = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
@@ -59,9 +59,17 @@ public class Pedidos extends javax.swing.JDialog {
 
             },
             new String [] {
-                "DESCRIPCION", "LARGO", "ANCHO", "ALTO"
+                "DESCRIPCION", "LARGO", "ANCHO", "ALTO", "CANTIDAD"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tabla);
 
         jLabel1.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
@@ -72,7 +80,7 @@ public class Pedidos extends javax.swing.JDialog {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("CANTIDAD");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cantidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
 
         jButton1.setText("AÑADIR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -95,7 +103,7 @@ public class Pedidos extends javax.swing.JDialog {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(76, 76, 76)
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
@@ -124,7 +132,7 @@ public class Pedidos extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -139,24 +147,26 @@ public class Pedidos extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int item = eleccion.getSelectedIndex();
-        System.out.println(item);
+        
         salida2 = new Archivos.Salida();
+        String unidades = (String)cantidad.getSelectedItem();
         try {
             salida2.Descripcion(item);
         } catch (IOException ex) {
-            Logger.getLogger(Pedidos.class.getName()).log(Level.SEVERE, null, ex);
+            
         }
         DefaultTableModel dtm = (DefaultTableModel) tabla.getModel();
-        dtm.addRow(salida2.toArrayString());
+        dtm.addRow(salida2.toArrayString(unidades));
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private static javax.swing.JComboBox<String> cantidad;
     private static javax.swing.JComboBox<String> eleccion;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
