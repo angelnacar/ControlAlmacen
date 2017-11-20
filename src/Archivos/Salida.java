@@ -22,7 +22,7 @@ public class Salida {
     
     public Salida() 
     {
-        fichero = new File("/home/angel/NetBeansProjects/ControlAlmacen/src/Datos/productos.dat");
+        fichero = new File("C:\\Users\\cursomulti\\Documents\\NetBeansProjects\\ControlAlmacen\\src\\Datos\\productos.dat");
         try {
             acceso = new RandomAccessFile(fichero,"r");
         } catch (FileNotFoundException ex) {
@@ -86,11 +86,12 @@ public class Salida {
     {
         return largo;
     }
-    public String[] toArrayString()
+    public String[] toArrayString(String cantidad)
     {
-        String[] s = {descripcion,largo,ancho,altura};
         
-        return (s); //Por la pagina 4 me quedo
+        String[] s = {descripcion,largo,ancho,altura,cantidad};
+        
+        return (s); 
     }
     
     
