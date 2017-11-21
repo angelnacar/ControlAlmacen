@@ -175,7 +175,7 @@ public class Pedidos extends javax.swing.JDialog {
                         String c=tabla.getValueAt(i, 2).toString();
                         String d=tabla.getValueAt(i, 3).toString();
                         String f=tabla.getValueAt(i, 4).toString();
-                        System.out.println(a);
+                       // System.out.println(a);
                         System.out.println(b);
                         
                         
