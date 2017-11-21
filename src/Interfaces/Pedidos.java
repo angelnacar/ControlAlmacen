@@ -90,6 +90,11 @@ public class Pedidos extends javax.swing.JDialog {
         });
 
         jButton2.setText("GUARDAR");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -160,8 +165,24 @@ public class Pedidos extends javax.swing.JDialog {
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
-  
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        for(int i=0;i<tabla.getRowCount();i++){
+                        /**
+                         * capta los valores de la tabla
+                         */
+                        String descripcion=tabla.getValueAt(i, 0).toString();
+                        String b=tabla.getValueAt(i, 1).toString();
+                        String c=tabla.getValueAt(i, 2).toString();
+                        String d=tabla.getValueAt(i, 3).toString();
+                        String f=tabla.getValueAt(i, 4).toString();
+                        System.out.println(a);
+                        System.out.println(b);
+                        
+                        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
+  
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private static javax.swing.JComboBox<String> cantidad;
     private static javax.swing.JComboBox<String> eleccion;
