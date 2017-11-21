@@ -13,6 +13,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Pedidos extends javax.swing.JDialog {
     static Archivos.Salida salida,salida2;
+    static Archivos.Entrada entrada;
+    static int numeroPedido = 0;
     
     public Pedidos(java.awt.Frame parent, boolean modal) throws IOException {
         super(parent, modal);
@@ -167,20 +169,20 @@ public class Pedidos extends javax.swing.JDialog {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         for(int i=0;i<tabla.getRowCount();i++){
-                        /**
-                         * capta los valores de la tabla
-                         */
-                        String descripcion=tabla.getValueAt(i, 0).toString();
-                        String b=tabla.getValueAt(i, 1).toString();
-                        String c=tabla.getValueAt(i, 2).toString();
-                        String d=tabla.getValueAt(i, 3).toString();
-                        String f=tabla.getValueAt(i, 4).toString();
-                       // System.out.println(a);
-                        System.out.println(b);
-                        
-                        
+         /**
+         * capta los valores de la tabla
+         */
+        String descripcion=tabla.getValueAt(i, 0).toString();
+        String largo=tabla.getValueAt(i, 1).toString();
+        String ancho=tabla.getValueAt(i, 2).toString();
+        String alto=tabla.getValueAt(i, 3).toString();
+        String cantidad=tabla.getValueAt(i, 4).toString();
+        
+        entrada = new Archivos.Entrada(descripcion,largo,ancho,alto,cantidad);
+        
+                         
     }//GEN-LAST:event_jButton2ActionPerformed
-
+        numeroPedido++;
   
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables

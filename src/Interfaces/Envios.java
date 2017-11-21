@@ -1,12 +1,16 @@
 
 package Interfaces;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Angel
  */
 public class Envios extends javax.swing.JDialog {
-
+    Archivos.Salida salida;
     
     public Envios(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -37,6 +41,11 @@ public class Envios extends javax.swing.JDialog {
 
         jButton1.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         jButton1.setText("CONSULTAR");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -74,6 +83,24 @@ public class Envios extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String pedidos = pedido.getText();
+        int num = Integer.parseInt(pedidos);
+        System.out.println(num);
+        salida = new Archivos.Salida(num);
+        int n = 0;
+        try {
+            
+            while(true)
+            {
+            resultado.setText("Producto: "+salida.DescripcionPedido(n)+"\nCantidad: "+salida.cantidad());
+            n++;
+            }
+        } catch (IOException ex) {
+            System.out.println(ex.toString());
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     
 
