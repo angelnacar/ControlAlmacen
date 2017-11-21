@@ -178,7 +178,7 @@ public class Pedidos extends javax.swing.JDialog {
         String alto=tabla.getValueAt(i, 3).toString();
         String cantidad=tabla.getValueAt(i, 4).toString();
         
-        entrada = new Archivos.Entrada(descripcion,largo,ancho,alto,cantidad);
+        entrada = new Archivos.Entrada(descripcion,largo,ancho,alto,cantidad,numeroPedido);
         
                          
     }//GEN-LAST:event_jButton2ActionPerformed

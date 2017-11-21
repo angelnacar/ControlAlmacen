@@ -120,16 +120,16 @@ public class Entrada{
      * @param cantidad
      * @param ped 
      */
-    public Entrada(String descripcion,String largo,String ancho, String altura,String cantidad)
+    public Entrada(String descripcion,String largo,String ancho, String altura,String cantidad,int ped)
     {
         
         //añade archivos de pedidos incrementalmente
-        do
-        {
+       // do
+        //{
           fichero = new File("C:\\Users\\cursomulti\\Documents\\NetBeansProjects\\ControlAlmacen\\src\\Datos\\pedido"+ped+".dat");
           ped++;
           
-        }while(fichero.exists());
+        //}while(fichero.exists());
         
         this.descripcion = descripcion;
         this.largo = largo;
