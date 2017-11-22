@@ -5,6 +5,7 @@ import java.io.EOFException;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -15,6 +16,7 @@ public class Pedidos extends javax.swing.JDialog {
     static Archivos.Salida salida,salida2;
     static Archivos.Entrada entrada;
     static int numeroPedido = 0;
+    static int contadorPedidos = 0;
     
     public Pedidos(java.awt.Frame parent, boolean modal) throws IOException {
         super(parent, modal);
@@ -153,6 +155,10 @@ public class Pedidos extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        contadorPedidos++; //maximo 10 pedidos
+        if(contadorPedidos < 9)
+        {
         int item = eleccion.getSelectedIndex();
         
         salida2 = new Archivos.Salida();
@@ -164,10 +170,17 @@ public class Pedidos extends javax.swing.JDialog {
         }
         DefaultTableModel dtm = (DefaultTableModel) tabla.getModel();
         dtm.addRow(salida2.toArrayString(unidades));
+        }else
+        {
+        contadorPedidos = 0; //vuelve a 0
+        JOptionPane aviso = new JOptionPane();
+        JOptionPane.showMessageDialog(aviso, "NO SE PUEDEN AGREGAR MAS PRODUCTOS, MAX 10", "Aviso", JOptionPane.ERROR_MESSAGE);
         
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
         for(int i=0;i<tabla.getRowCount();i++){
          /**
          * capta los valores de la tabla
@@ -177,12 +190,16 @@ public class Pedidos extends javax.swing.JDialog {
         String ancho=tabla.getValueAt(i, 2).toString();
         String alto=tabla.getValueAt(i, 3).toString();
         String cantidad=tabla.getValueAt(i, 4).toString();
-        
         entrada = new Archivos.Entrada(descripcion,largo,ancho,alto,cantidad,numeroPedido);
-        
+       
+       
                          
     }//GEN-LAST:event_jButton2ActionPerformed
         numeroPedido++;
+        JOptionPane aviso = new JOptionPane();
+        JOptionPane.showMessageDialog(aviso, "PEDIDO Nº:"+numeroPedido+" GUARDADO", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+        
+        
   
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables

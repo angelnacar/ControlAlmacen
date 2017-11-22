@@ -11,6 +11,8 @@ import java.util.logging.Logger;
  */
 public class Envios extends javax.swing.JDialog {
     Archivos.Salida salida;
+    Calculos.Cajas caja;
+    Archivos.SalidaCajas cajas;
     
     public Envios(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -89,16 +91,32 @@ public class Envios extends javax.swing.JDialog {
         int num = Integer.parseInt(pedidos);
         System.out.println(num);
         salida = new Archivos.Salida(num);
+        cajas = new Archivos.SalidaCajas();
         int n = 0;
+        
+        
+        int volumen = 0;
         try {
             
             while(true)
             {
-            resultado.append("Producto nº: "+n+" "+salida.DescripcionPedido(n)+"\nAlto: "+salida.altura()+" Ancho: "+salida.anchura()+" Largo: "+salida.largura()+ "\nCantidad: "+salida.cantidad()+"\n");
+                cajas.Construye(n);
+            resultado.append("Producto nº: "+n+" "+salida.DescripcionPedido(n)+"\nAlto: "+salida.altura()+" Ancho: "+salida.anchura()+" Largo: "+salida.largura()+ "\nCantidad: "+salida.cantidad()+"\nMedidas caja : "+cajas.altura()+" "+cajas.anchura()+"\n");
             n++;
+             
+              //trim elimina espacios en blanco
+             int lar = Integer.parseInt(salida.altura().trim());
+             int anch = Integer.parseInt(salida.anchura().trim());
+             int alt = Integer.parseInt(salida.altura().trim());
+            caja = new Calculos.Cajas(lar,anch,alt);
+            volumen += caja.Volumen();
+            
             }
+            
+            
         } catch (IOException ex) {
             System.out.println(ex.toString());
+            System.out.println("volumen total del pedido "+volumen+" cm3");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

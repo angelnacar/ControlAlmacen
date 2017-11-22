@@ -2,6 +2,7 @@
 package Interfaces;
 
 import static Interfaces.Productos.entrada;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -105,8 +106,40 @@ public class Embalajes extends javax.swing.JDialog {
 
     public static void Datos()
     {
+        try //controla que el usuario meta numeros en medidas
+      {
+        if(Integer.parseInt(largo.getText().trim()) > 40) //controla las medidas de las cajas
+        {
+           JOptionPane aviso = new JOptionPane();
+           JOptionPane.showMessageDialog(aviso, "LARGO MAXIMO 40 CM", "Aviso", JOptionPane.WARNING_MESSAGE);
+        }
+        else if(Integer.parseInt(ancho.getText().trim()) > 30)
+        {
+           JOptionPane aviso = new JOptionPane();
+           JOptionPane.showMessageDialog(aviso, "ANCHO MAXIMO 20 CM", "Aviso", JOptionPane.WARNING_MESSAGE);
+        }
+        else if(Integer.parseInt(altura.getText().trim()) > 30)
+        {
+           JOptionPane aviso = new JOptionPane();
+           JOptionPane.showMessageDialog(aviso, "ALTURA MAXIMO 30 CM", "Aviso", JOptionPane.WARNING_MESSAGE);
+        }
+        else
+        {
+         entrada = new Archivos.Entrada(largo.getText(),ancho.getText(),altura.getText());
+        JOptionPane aviso = new JOptionPane();
+        JOptionPane.showMessageDialog(aviso, "EMBALAJE GUARDADO ", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+        altura.setText(""); //limpia los jlabel
+        largo.setText("");
+        ancho.setText("");
         
-        entrada = new Archivos.Entrada(largo.getText(),ancho.getText(),altura.getText());
+        }
+    
+      }catch(NumberFormatException e)
+       {
+           JOptionPane aviso = new JOptionPane();
+           JOptionPane.showMessageDialog(aviso, "INTRODUZCA NUMEROS EN LAS MEDIDAS", "Aviso", JOptionPane.WARNING_MESSAGE);
+       }
+       
     }
     
 
