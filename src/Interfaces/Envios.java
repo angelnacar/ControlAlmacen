@@ -94,7 +94,7 @@ public class Envios extends javax.swing.JDialog {
             
             while(true)
             {
-            resultado.append("Producto: "+salida.DescripcionPedido(n)+"\nCantidad: "+salida.cantidad()+"\n");
+            resultado.append("Producto nº: "+n+" "+salida.DescripcionPedido(n)+"\nAlto: "+salida.altura()+" Ancho: "+salida.anchura()+" Largo: "+salida.largura()+ "\nCantidad: "+salida.cantidad()+"\n");
             n++;
             }
         } catch (IOException ex) {

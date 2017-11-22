@@ -35,7 +35,7 @@ public class Entrada{
     public Entrada(String descripcion,String largo,String ancho, String altura)
     {
         
-        fichero = new File("C:\\Users\\cursomulti\\Documents\\NetBeansProjects\\ControlAlmacen\\src\\Datos\\productos.dat"); //ruta al archivo, cambia según la máquina
+        fichero = new File("/home/angel/NetBeansProjects/ControlAlmacen/src/Datos/productos.dat"); //ruta al archivo, cambia según la máquina
         this.descripcion = descripcion;
         this.largo = largo;
         this.ancho = ancho;
@@ -78,7 +78,7 @@ public class Entrada{
      */
     public Entrada(String largo,String ancho, String altura)
     {
-        fichero = new File("C:\\Users\\cursomulti\\Documents\\NetBeansProjects\\ControlAlmacen\\src\\Datos\\embalajes.dat"); //ruta al archivo, cambia según la máquina
+        fichero = new File("/home/angel/NetBeansProjects/ControlAlmacen/src/Datos/embalajes.dat"); //ruta al archivo, cambia según la máquina
         this.largo = largo;
         this.ancho = ancho;
         this.altura = altura;
@@ -126,7 +126,7 @@ public class Entrada{
         //añade archivos de pedidos incrementalmente
        // do
         //{
-          fichero = new File("C:\\Users\\cursomulti\\Documents\\NetBeansProjects\\ControlAlmacen\\src\\Datos\\pedido"+ped+".dat");
+          fichero = new File("/home/angel/NetBeansProjects/ControlAlmacen/src/Datos/pedido"+ped+".dat");
           ped++;
           
         //}while(fichero.exists());

@@ -22,7 +22,7 @@ public class Salida {
     
     public Salida() 
     {
-        fichero = new File("C:\\Users\\cursomulti\\Documents\\NetBeansProjects\\ControlAlmacen\\src\\Datos\\productos.dat");
+        fichero = new File("/home/angel/NetBeansProjects/ControlAlmacen/src/Datos/productos.dat");
         try {
             acceso = new RandomAccessFile(fichero,"r");
         } catch (FileNotFoundException ex) {
@@ -37,7 +37,7 @@ public class Salida {
      */
     public Salida(int numero) 
     {
-        fichero = new File("C:\\Users\\cursomulti\\Documents\\NetBeansProjects\\ControlAlmacen\\src\\Datos\\pedido"+numero+".dat");
+        fichero = new File("/home/angel/NetBeansProjects/ControlAlmacen/src/Datos/pedido"+numero+".dat");
         try {
             acceso = new RandomAccessFile(fichero,"r");
         } catch (FileNotFoundException ex) {
