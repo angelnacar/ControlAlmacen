@@ -14,6 +14,7 @@ public class Envios extends javax.swing.JDialog {
     Calculos.Cajas caja;
     Archivos.SalidaCajas cajas;
     
+    
     public Envios(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -33,6 +34,8 @@ public class Envios extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("ENVIOS");
+        setMaximumSize(new java.awt.Dimension(700, 500));
+        setMinimumSize(new java.awt.Dimension(700, 500));
 
         jLabel1.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -40,6 +43,8 @@ public class Envios extends javax.swing.JDialog {
 
         resultado.setColumns(20);
         resultado.setRows(5);
+        resultado.setMaximumSize(new java.awt.Dimension(690, 400));
+        resultado.setMinimumSize(new java.awt.Dimension(690, 400));
         jScrollPane1.setViewportView(resultado);
 
         jButton1.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
@@ -63,21 +68,18 @@ public class Envios extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(enviar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(68, 68, 68)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36)
-                        .addComponent(pedido, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
+                .addComponent(pedido, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(36, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(enviar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(63, 63, 63))
+            .addComponent(jScrollPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -87,12 +89,11 @@ public class Envios extends javax.swing.JDialog {
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pedido, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(enviar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(enviar, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         pack();
@@ -104,31 +105,35 @@ public class Envios extends javax.swing.JDialog {
         System.out.println(num);
         salida = new Archivos.Salida(num);
         cajas = new Archivos.SalidaCajas();
+        int lar = 0,anch = 0,alt = 0;
         int n = 0;
         
         
         int volumen = 0;
         try {
-            
+            resultado.setText(""); //en cada consulta de pedido nuevo limpia la pantalla
+            resultado.append("----------------------------------PEDIDO Nº:"+num+"------------------------------------------------\n");
             while(true)
             {
                 cajas.Construye(n);
-            resultado.append("Producto nº: "+n+" "+salida.DescripcionPedido(n)+"\nAlto: "+salida.altura()+" Ancho: "+salida.anchura()+" Largo: "+salida.largura()+ "\nCantidad: "+salida.cantidad()+"\nMedidas caja : "+cajas.altura()+" "+cajas.anchura()+"\n");
+            resultado.append("Producto nº: "+n+"\nDescripcion: "+salida.DescripcionPedido(n)+"\nAlto: "+salida.altura()+" Ancho: "+salida.anchura()+" Largo: "+salida.largura()+ "\nCantidad: "+salida.cantidad()+"\n");
             n++;
              
               //trim elimina espacios en blanco
-             int lar = Integer.parseInt(salida.altura().trim());
-             int anch = Integer.parseInt(salida.anchura().trim());
-             int alt = Integer.parseInt(salida.altura().trim());
+             lar += Integer.parseInt(salida.altura().trim());
+             anch += Integer.parseInt(salida.anchura().trim());
+             alt += Integer.parseInt(salida.altura().trim());
             caja = new Calculos.Cajas(lar,anch,alt);
-            volumen += caja.Volumen();
+            volumen += caja.Volumen()*Integer.parseInt(salida.cantidad().trim());
             
             }
             
             
         } catch (IOException ex) {
-            System.out.println(ex.toString());
-            System.out.println("volumen total del pedido "+volumen+" cm3");
+            
+            resultado.append("----------------------- FIN PEDIDO -------------------------------");
+            caja.Calcula(volumen);
+            
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
