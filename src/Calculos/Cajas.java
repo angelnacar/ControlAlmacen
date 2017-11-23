@@ -37,10 +37,10 @@ public class Cajas {
         int numCaja = 0;
         String caja="";
         boolean control = true;
-        ArrayList<String> listado = new ArrayList();
+       // ArrayList<String> listado = new ArrayList();
        try { 
         while(control)
-        {
+        { 
            cajas.Construye(contador);
           
            int volumen = Integer.parseInt(cajas.altura().trim())*Integer.parseInt(cajas.anchura().trim())*Integer.parseInt(cajas.largura().trim());
