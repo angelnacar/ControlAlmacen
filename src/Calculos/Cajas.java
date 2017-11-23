@@ -30,42 +30,50 @@ public class Cajas {
        return vol;
    }
     
-    public void Calcula(int vol,int altura)
+    public void Calcula(int vol,int largo, int ancho, int alto)
     {
         cajas = new Archivos.SalidaCajas();
         int contador = 0;
-        int numCaja = 1;
+        int numCaja = 0;
+        String caja="";
+        boolean control = true;
         ArrayList<String> listado = new ArrayList();
        try { 
-        while(true)
+        while(control)
         {
            cajas.Construye(contador);
-           contador++;
+          
            int volumen = Integer.parseInt(cajas.altura().trim())*Integer.parseInt(cajas.anchura().trim())*Integer.parseInt(cajas.largura().trim());
+           
            if(vol<volumen)
            {
-               if(Integer.parseInt(cajas.altura().trim())<= altura)
+               if(Integer.parseInt(cajas.largura().trim())*numCaja<= largo && Integer.parseInt(cajas.anchura().trim())*numCaja<= ancho && Integer.parseInt(cajas.anchura().trim())*numCaja<= ancho )
                {
+                   numCaja++;
                JOptionPane aviso = new JOptionPane();
                JOptionPane.showMessageDialog(aviso, "UTILIZAR CAJA Nº:"+numCaja, "Cajas", JOptionPane.INFORMATION_MESSAGE);
-               
+               control = false;
+               System.out.println("CAJAS A UTILIZAR");
+                System.out.println(caja);
+                System.out.println("Numero de cajas a utilizar "+numCaja);
                break;
                }
+               else
+               {
+                   contador++;
+                   numCaja++;
+               }
            }
-           else if(vol>volumen)
+           else 
            {
-               numCaja++;
-               String caja = "ALTURA "+cajas.altura()+" ANCHO "+cajas.anchura()+" LARGO "+cajas.largura();
-               listado.add(caja);
                
+               contador++;
+                caja = "ALTURA "+cajas.altura()+" ANCHO "+cajas.anchura()+" LARGO "+cajas.largura();
+                System.out.println("mas cajas");
            }
         }
         } catch (IOException ex) {
-                System.out.println("CAJAS A UTILIZAR");
-                for(int i = 0;i<listado.size();i++)
-                {
-                    System.out.println("caja "+i+" "+listado.get(i));
-                }
+                
             }
     }
 }

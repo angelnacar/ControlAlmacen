@@ -120,9 +120,9 @@ public class Envios extends javax.swing.JDialog {
             n++;
              
               //trim elimina espacios en blanco
-             lar += Integer.parseInt(salida.altura().trim());
-             anch += Integer.parseInt(salida.anchura().trim());
-             alt += Integer.parseInt(salida.altura().trim());
+             lar += Integer.parseInt(salida.altura().trim())*Integer.parseInt(salida.cantidad().trim());
+             anch += Integer.parseInt(salida.anchura().trim())*Integer.parseInt(salida.cantidad().trim());
+             alt += Integer.parseInt(salida.altura().trim())*Integer.parseInt(salida.cantidad().trim());
             caja = new Calculos.Cajas(lar,anch,alt);
             volumen += caja.Volumen()*Integer.parseInt(salida.cantidad().trim());
             
@@ -132,7 +132,8 @@ public class Envios extends javax.swing.JDialog {
         } catch (IOException ex) {
             
             resultado.append("----------------------- FIN PEDIDO -------------------------------");
-            caja.Calcula(volumen);
+            
+            caja.Calcula(volumen,lar,anch,alt);
             
         }
     }//GEN-LAST:event_jButton1ActionPerformed
