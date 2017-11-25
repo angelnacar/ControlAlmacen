@@ -1,18 +1,27 @@
 
 package Interfaces;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.DataOutputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Angel
  */
 public class Envios extends javax.swing.JDialog {
-    Archivos.Salida salida;
-    Calculos.Cajas caja;
-    Archivos.SalidaCajas cajas;
+    static Archivos.Salida producto;
+    static Calculos.Cajas caja;
+    static Archivos.SalidaCajas cajas;
     
     
     public Envios(java.awt.Frame parent, boolean modal) {
@@ -98,50 +107,130 @@ public class Envios extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * evento de consulta de pedido
+     * 
+     * @param evt 
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Imprime();
+    }//GEN-LAST:event_jButton1ActionPerformed
+    
+    /**
+     * evento de envío de pedido
+     * @param evt 
+     */
+    private void enviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarActionPerformed
+       if(Enviar())
+       {
+           BufferedWriter escribir;
+           try {
+               escribir = new BufferedWriter(new FileWriter("src/Datos/envios.txt",true));
+               escribir.write(pedido.getText());
+               escribir.newLine(); //salto de linea
+               escribir.close();
+               JOptionPane aviso = new JOptionPane();
+               JOptionPane.showMessageDialog(aviso, "PEDIDO ENVIADO", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+               pedido.setText("");
+               resultado.setText("");
+           } catch (IOException ex) {
+               System.out.println("error");
+           }
+           
+       
+       }
+       else
+       {
+          
+       }
+        
+    }//GEN-LAST:event_enviarActionPerformed
+    
+    /**
+     * Imprime en pantalla el pedido que introduce el usuario
+     */
+    public static void Imprime()
+    {
         String pedidos = pedido.getText();
-        int num = Integer.parseInt(pedidos);
-        System.out.println(num);
-        salida = new Archivos.Salida(num);
+        int num = Integer.parseInt(pedidos); //numero de pedido
+       
         cajas = new Archivos.SalidaCajas();
         int lar = 0,anch = 0,alt = 0;
         int n = 0;
+        int numeroCaja = 0;
+        int unidadesCajas = 0;
+        try{
+        producto = new Archivos.Salida(num); //productos
         
         
-        int volumen = 0;
         try {
+             
             resultado.setText(""); //en cada consulta de pedido nuevo limpia la pantalla
-            resultado.append("----------------------------------PEDIDO Nº:"+num+"------------------------------------------------\n");
+            resultado.append("-------------------------PEDIDO Nº: "+num+"-----------------------------\n");
             while(true)
             {
-                cajas.Construye(n);
-            resultado.append("Producto nº: "+n+"\nDescripcion: "+salida.DescripcionPedido(n)+"\nAlto: "+salida.altura()+" Ancho: "+salida.anchura()+" Largo: "+salida.largura()+ "\nCantidad: "+salida.cantidad()+"\n");
-            n++;
-             
-              //trim elimina espacios en blanco
-             lar += Integer.parseInt(salida.altura().trim())*Integer.parseInt(salida.cantidad().trim());
-             anch += Integer.parseInt(salida.anchura().trim())*Integer.parseInt(salida.cantidad().trim());
-             alt += Integer.parseInt(salida.altura().trim())*Integer.parseInt(salida.cantidad().trim());
-            caja = new Calculos.Cajas(lar,anch,alt);
-            volumen += caja.Volumen()*Integer.parseInt(salida.cantidad().trim());
-            
+                resultado.append("  Producto nº: "+n+"\n  Descripcion: "+producto.DescripcionPedido(n)+"\n    Alto: "+producto.altura()+"   Ancho: "+producto.anchura()+" Largo: "+producto.largura()+ "\n  Cantidad: "+producto.cantidad()+"\n");
+                n++;
             }
-            
-            
+          
         } catch (IOException ex) {
             
             resultado.append("----------------------- FIN PEDIDO -------------------------------");
-            
-            caja.Calcula(volumen,lar,anch,alt);
-            
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+        }catch (FileNotFoundException ex) {
+            JOptionPane aviso = new JOptionPane();
+            JOptionPane.showMessageDialog(aviso, "NO EXISTE EL PEDIDO CONSULTADO", "Aviso", JOptionPane.ERROR_MESSAGE);
+            resultado.setText("");
+        }
+    }
+    
+    /**
+     * calcula el numero de cajas necesarias para el envío
+     */
+    public static void CalculoCajas()
+    {
+        String pedidos = pedido.getText();
+        int num = Integer.parseInt(pedidos); //numero de pedido
+        //producto = new Archivos.Salida(num); //productos
+        cajas = new Archivos.SalidaCajas();
+        
+        
+    
+    }
+    
+    /**
+     * Guarda en fichero el numero de pedido enviado
+     */
+    public static boolean Enviar()
+    {
+        try {
+            
+            BufferedReader leer = new BufferedReader(new FileReader("src/Datos/envios.txt"));
+            
+            
+            while(leer.ready())
+            {
+                
+                if(leer.readLine().equals(pedido.getText()))
+                {
+                    JOptionPane aviso = new JOptionPane();
+                    JOptionPane.showMessageDialog(aviso, "EL PEDIDO NUMERO "+pedido.getText()+" YA HA SIDO ENVIADO", "Aviso", JOptionPane.ERROR_MESSAGE);
+                    return false;
+                }
+                
+            }
+            
+            
+            
+        } catch (IOException ex) {
+            JOptionPane aviso = new JOptionPane();
+            JOptionPane.showMessageDialog(aviso, "NO ENCUENTRA EL ARCHIVO", "Aviso", JOptionPane.ERROR_MESSAGE);
+        }
+           
+            
+         return true;
 
-    private void enviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_enviarActionPerformed
-
+    }
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

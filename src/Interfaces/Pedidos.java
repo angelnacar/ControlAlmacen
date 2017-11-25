@@ -1,7 +1,10 @@
 
 package Interfaces;
 
+import java.io.BufferedReader;
 import java.io.EOFException;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,16 +16,17 @@ import javax.swing.table.DefaultTableModel;
  * @author angel
  */
 public class Pedidos extends javax.swing.JDialog {
+    
     static Archivos.Salida salida,salida2;
     static Archivos.Entrada entrada;
-    static int numeroPedido = 0;
+    static String numeroPedido = "";
     static int contadorPedidos = 0;
     
     public Pedidos(java.awt.Frame parent, boolean modal) throws IOException {
         super(parent, modal);
         initComponents();
-       salida = new Archivos.Salida();
-       int n = 0;
+        salida = new Archivos.Salida();
+        int n = 0;
         
      try{
         while(true) //hasta que lance excepcion
@@ -48,8 +52,8 @@ public class Pedidos extends javax.swing.JDialog {
         eleccion = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         cantidad = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        añadir = new javax.swing.JButton();
+        guardar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("PEDIDOS");
@@ -86,17 +90,17 @@ public class Pedidos extends javax.swing.JDialog {
 
         cantidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
 
-        jButton1.setText("AÑADIR");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        añadir.setText("AÑADIR");
+        añadir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                añadirActionPerformed(evt);
             }
         });
 
-        jButton2.setText("GUARDAR");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        guardar.setText("GUARDAR");
+        guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                guardarActionPerformed(evt);
             }
         });
 
@@ -123,9 +127,9 @@ public class Pedidos extends javax.swing.JDialog {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(12, 12, 12)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(añadir, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(57, 57, 57)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
@@ -146,16 +150,30 @@ public class Pedidos extends javax.swing.JDialog {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(añadir)
+                    .addComponent(guardar))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void añadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_añadirActionPerformed
         
+        AñadirPedidos();
+        
+    }//GEN-LAST:event_añadirActionPerformed
+
+    private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
+        ultimoPedido();
+        GuardarPedido();
+    }//GEN-LAST:event_guardarActionPerformed
+       
+        
+        
+  
+    public static void AñadirPedidos()
+    {
         contadorPedidos++; //maximo 10 pedidos
         if(contadorPedidos < 9)
         {
@@ -177,36 +195,65 @@ public class Pedidos extends javax.swing.JDialog {
         JOptionPane.showMessageDialog(aviso, "NO SE PUEDEN AGREGAR MAS PRODUCTOS, MAX 10", "Aviso", JOptionPane.ERROR_MESSAGE);
         
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
-        for(int i=0;i<tabla.getRowCount();i++){
-         /**
+    
+    }
+    
+    public static void GuardarPedido()
+    {
+        /**
          * capta los valores de la tabla
          */
+        for(int i=0;i<tabla.getRowCount();i++)
+        {
+         
         String descripcion=tabla.getValueAt(i, 0).toString();
         String largo=tabla.getValueAt(i, 1).toString();
         String ancho=tabla.getValueAt(i, 2).toString();
         String alto=tabla.getValueAt(i, 3).toString();
         String cantidad=tabla.getValueAt(i, 4).toString();
-        entrada = new Archivos.Entrada(descripcion,largo,ancho,alto,cantidad,numeroPedido);
+            try {
+                entrada = new Archivos.Entrada(descripcion,largo,ancho,alto,cantidad,Integer.parseInt(numeroPedido.trim())+1);
+            } catch (IOException ex) {
+                Logger.getLogger(Pedidos.class.getName()).log(Level.SEVERE, null, ex);
+            }
        
-       
-                         
-    }//GEN-LAST:event_jButton2ActionPerformed
-        numeroPedido++;
+       }                                       
+        //numeroPedido++;
         JOptionPane aviso = new JOptionPane();
         JOptionPane.showMessageDialog(aviso, "PEDIDO Nº:"+numeroPedido+" GUARDADO", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+    
+    }
+    
+    /**
+     * coge el ultimo pedido enviado
+     */
+    public static void ultimoPedido()
+    {
+        try {
+            BufferedReader leer = new BufferedReader(new FileReader("src/Datos/pedidos.txt"));
+            
+                    while(leer.ready())
+                    {
+                    numeroPedido = leer.readLine();
+                        
+                    }
+                    leer.close();
+                
+                
+                } catch (FileNotFoundException ex) {
+                     JOptionPane aviso = new JOptionPane();
+                     JOptionPane.showMessageDialog(aviso, "NO ENCUENTRA EL ARCHIVO", "Aviso", JOptionPane.ERROR_MESSAGE);
+        } catch (IOException ex) {
+            JOptionPane aviso = new JOptionPane();
+            JOptionPane.showMessageDialog(aviso, "NO PUEDE LEER EL ARCHIVO", "Aviso", JOptionPane.ERROR_MESSAGE);
+        }
         
-        
-  
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton añadir;
     private static javax.swing.JComboBox<String> cantidad;
     private static javax.swing.JComboBox<String> eleccion;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton guardar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

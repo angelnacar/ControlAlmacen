@@ -1,8 +1,10 @@
 
 package Archivos;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import javax.swing.JOptionPane;
@@ -120,16 +122,17 @@ public class Entrada{
      * @param cantidad
      * @param ped 
      */
-    public Entrada(String descripcion,String largo,String ancho, String altura,String cantidad,int ped)
+    public Entrada(String descripcion,String largo,String ancho, String altura,String cantidad,int ped) throws IOException
     {
         
-        //añade archivos de pedidos incrementalmente
-       // do
-        //{
+          String pedido = String.valueOf(ped);
           fichero = new File("src/Datos/pedido"+ped+".dat");
-          ped++;
+          BufferedWriter escribe = new BufferedWriter(new FileWriter("src/Datos/pedidos.txt",true)); //almacena el número del último pedido
+          escribe.write(pedido);
+          escribe.newLine();
+          escribe.close();
           
-        //}while(fichero.exists());
+       
         
         this.descripcion = descripcion;
         this.largo = largo;

@@ -35,15 +35,10 @@ public class Salida {
      * Abre el archivo de pedido indicado por el usuario
      * @param numero 
      */
-    public Salida(int numero) 
+    public Salida(int numero) throws FileNotFoundException 
     {
         fichero = new File("src/Datos/pedido"+numero+".dat");
-        try {
-            acceso = new RandomAccessFile(fichero,"r");
-        } catch (FileNotFoundException ex) {
-            JOptionPane aviso = new JOptionPane();
-            JOptionPane.showMessageDialog(aviso, "NO ENCUENTRA EL ARCHIVO", "Aviso", JOptionPane.ERROR_MESSAGE);
-        }
+        acceso = new RandomAccessFile(fichero,"r");
     }
     
     /**
@@ -75,16 +70,16 @@ public class Salida {
             lar[k] = aux2;
         }
         
-        for(int m = 0;m<alt.length;m++)
+        for(int m = 0;m<an.length;m++)
         {
             aux3 = acceso.readChar();
             an[m] = aux3;
         }
         
-        for(int z = 0;z<alt.length;z++)
+        for(int z = 0;z<lar.length;z++)
         {
             aux4 = acceso.readChar();
-            alt[z] = aux4;
+            lar[z] = aux4;
         }
         
         descripcion = new String(nombre);
@@ -95,6 +90,13 @@ public class Salida {
         return descripcion;
    }
     
+    /**
+     * devuelve los datos de cada producto con la cantidad pedida
+     * @param n
+     * @return
+     * @throws EOFException
+     * @throws IOException 
+     */
     public String DescripcionPedido(int n) throws EOFException, IOException 
     {
        
@@ -118,16 +120,16 @@ public class Salida {
             lar[k] = aux2;
         }
         
-        for(int m = 0;m<alt.length;m++)
+        for(int m = 0;m<an.length;m++)
         {
             aux3 = acceso.readChar();
             an[m] = aux3;
         }
         
-        for(int z = 0;z<alt.length;z++)
+        for(int z = 0;z<lar.length;z++)
         {
             aux4 = acceso.readChar();
-            alt[z] = aux4;
+            lar[z] = aux4;
         }
         for(int s = 0;s<can.length;s++)
         {
