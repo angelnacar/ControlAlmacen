@@ -21,6 +21,7 @@ public class Pedidos extends javax.swing.JDialog {
     static Archivos.Entrada entrada;
     static String numeroPedido = "";
     static int contadorPedidos = 0;
+    static BufferedReader leer;
     
     public Pedidos(java.awt.Frame parent, boolean modal) throws IOException {
         super(parent, modal);
@@ -218,9 +219,9 @@ public class Pedidos extends javax.swing.JDialog {
             }
        
        }                                       
-        //numeroPedido++;
+        int ped = Integer.parseInt(numeroPedido.trim()) + 1;
         JOptionPane aviso = new JOptionPane();
-        JOptionPane.showMessageDialog(aviso, "PEDIDO Nº:"+numeroPedido+" GUARDADO", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(aviso, "PEDIDO Nº:"+ped+" GUARDADO", "Aviso", JOptionPane.INFORMATION_MESSAGE);
     
     }
     
@@ -230,8 +231,8 @@ public class Pedidos extends javax.swing.JDialog {
     public static void ultimoPedido()
     {
         try {
-            BufferedReader leer = new BufferedReader(new FileReader("src/Datos/pedidos.txt"));
             
+            leer = new BufferedReader(new FileReader("src/Datos/pedidos.txt"));
                     while(leer.ready())
                     {
                     numeroPedido = leer.readLine();

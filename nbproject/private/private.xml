@@ -2,17 +2,17 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< HEAD
-        <group/>
-=======
         <group>
-            <file>file:/C:/Users/cursomulti/Documents/NetBeansProjects/ControlAlmacen/src/Archivos/Entrada.java</file>
-            <file>file:/C:/Users/cursomulti/Documents/NetBeansProjects/ControlAlmacen/src/Archivos/SalidaCajas.java</file>
-            <file>file:/C:/Users/cursomulti/Documents/NetBeansProjects/ControlAlmacen/src/Calculos/Cajas.java</file>
-            <file>file:/C:/Users/cursomulti/Documents/NetBeansProjects/ControlAlmacen/src/Interfaces/Envios.java</file>
-            <file>file:/C:/Users/cursomulti/Documents/NetBeansProjects/ControlAlmacen/src/Archivos/Salida.java</file>
-            <file>file:/C:/Users/cursomulti/Documents/NetBeansProjects/ControlAlmacen/src/Interfaces/Pedidos.java</file>
+            <file>file:/C:/Users/Angel/Documents/NetBeansProjects/ProyectoTrimestre/src/Interfaces/Pedidos.java</file>
+            <file>file:/C:/Users/Angel/Documents/NetBeansProjects/ProyectoTrimestre/src/Interfaces/Menu.java</file>
+            <file>file:/C:/Users/Angel/Documents/NetBeansProjects/ProyectoTrimestre/src/Archivos/Entrada.java</file>
+            <file>file:/C:/Users/Angel/Documents/NetBeansProjects/ProyectoTrimestre/src/Interfaces/Embalajes.java</file>
+            <file>file:/C:/Users/Angel/Documents/NetBeansProjects/ProyectoTrimestre/src/Interfaces/Envios.java</file>
+            <file>file:/C:/Users/Angel/Documents/NetBeansProjects/ProyectoTrimestre/src/Interfaces/Consultas.java</file>
+            <file>file:/C:/Users/Angel/Documents/NetBeansProjects/ProyectoTrimestre/src/Calculos/Cajas.java</file>
+            <file>file:/C:/Users/Angel/Documents/NetBeansProjects/ProyectoTrimestre/src/Archivos/Salida.java</file>
+            <file>file:/C:/Users/Angel/Documents/NetBeansProjects/ProyectoTrimestre/src/Archivos/SalidaCajas.java</file>
+            <file>file:/C:/Users/Angel/Documents/NetBeansProjects/ProyectoTrimestre/src/Interfaces/Productos.java</file>
         </group>
->>>>>>> 979335aa391666b549006773af134e6eb8b66ece
     </open-files>
 </project-private>
