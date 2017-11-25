@@ -74,6 +74,7 @@ public class Consultas extends javax.swing.JDialog {
         
         try {
             BufferedReader leer = new BufferedReader(new FileReader("src/Datos/envios.txt"));
+            BufferedReader leer2 = new BufferedReader(new FileReader("src/Datos/pedidos.txt"));
             
             
             try {
@@ -82,8 +83,13 @@ public class Consultas extends javax.swing.JDialog {
                     
                     dtm.addRow(new Object[]{leer.readLine()," SI"});
                }
+                while(leer2.ready())
+                {
+                    
+                    dtm.addRow(new Object[]{leer2.readLine()," ?"});
+               }
             } catch (IOException ex) {
-                Logger.getLogger(Consultas.class.getName()).log(Level.SEVERE, null, ex);
+                
             }
         } catch (FileNotFoundException ex) {
            JOptionPane aviso = new JOptionPane();

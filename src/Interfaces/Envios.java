@@ -113,7 +113,14 @@ public class Envios extends javax.swing.JDialog {
      * @param evt 
      */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       try
+       {
         Imprime();
+       }catch(NumberFormatException e)
+       {
+           JOptionPane aviso = new JOptionPane();
+          JOptionPane.showMessageDialog(aviso, "INTRODUZCA UN NUMERO DE PEDIDO", "Aviso", JOptionPane.WARNING_MESSAGE);
+       }
     }//GEN-LAST:event_jButton1ActionPerformed
     
     /**
@@ -121,9 +128,12 @@ public class Envios extends javax.swing.JDialog {
      * @param evt 
      */
     private void enviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarActionPerformed
-       if(Enviar())
-       {
-           BufferedWriter escribir;
+       
+        if(ComprobarPedido())
+         {
+            if(Enviar())
+             {
+                BufferedWriter escribir;
            try {
                escribir = new BufferedWriter(new FileWriter("src/Datos/envios.txt",true));
                escribir.write(pedido.getText());
@@ -137,10 +147,21 @@ public class Envios extends javax.swing.JDialog {
                System.out.println("error");
            }
            
-       
+           }
+            else
+            {
+                JOptionPane aviso = new JOptionPane();
+                JOptionPane.showMessageDialog(aviso, "EL PEDIDO NUMERO "+pedido.getText()+" YA HA SIDO ENVIADO", "Aviso", JOptionPane.ERROR_MESSAGE);
+                pedido.setText("");
+                resultado.setText("");
+            }
        }
        else
        {
+          JOptionPane aviso = new JOptionPane();
+          JOptionPane.showMessageDialog(aviso, "NO PUEDE ENVIAR UN PEDIDO QUE NO EXISTE", "Aviso", JOptionPane.ERROR_MESSAGE);
+          pedido.setText("");
+          resultado.setText("");
           
        }
         
@@ -149,7 +170,7 @@ public class Envios extends javax.swing.JDialog {
     /**
      * Imprime en pantalla el pedido que introduce el usuario
      */
-    public static void Imprime()
+    public static void Imprime() throws NumberFormatException
     {
         String pedidos = pedido.getText();
         int num = Integer.parseInt(pedidos); //numero de pedido
@@ -213,8 +234,7 @@ public class Envios extends javax.swing.JDialog {
                 
                 if(leer.readLine().equals(pedido.getText()))
                 {
-                    JOptionPane aviso = new JOptionPane();
-                    JOptionPane.showMessageDialog(aviso, "EL PEDIDO NUMERO "+pedido.getText()+" YA HA SIDO ENVIADO", "Aviso", JOptionPane.ERROR_MESSAGE);
+                    
                     return false;
                 }
                 
@@ -230,6 +250,32 @@ public class Envios extends javax.swing.JDialog {
             
          return true;
 
+    }
+    
+    /**
+     * Comprueba que exista el pedido a enviar
+     * @return 
+     */
+    public static boolean ComprobarPedido()
+    {
+        try {
+            BufferedReader leer2 = new BufferedReader(new FileReader("src/Datos/pedidos.txt"));
+            
+            while(leer2.ready())
+            {
+                if(leer2.readLine().equals(pedido.getText()))
+                {
+                    return true;
+                }
+            }
+            
+            
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Envios.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            return false;
+        }
+        return false;
     }
     
 
