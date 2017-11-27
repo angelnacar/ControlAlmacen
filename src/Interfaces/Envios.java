@@ -22,6 +22,7 @@ public class Envios extends javax.swing.JDialog {
     static Archivos.Salida producto;
     static Calculos.Cajas caja;
     static Archivos.SalidaCajas cajas;
+    static int unidadesCajas = 0;
     
     
     public Envios(java.awt.Frame parent, boolean modal) {
@@ -141,6 +142,7 @@ public class Envios extends javax.swing.JDialog {
                escribir.close();
                JOptionPane aviso = new JOptionPane();
                JOptionPane.showMessageDialog(aviso, "PEDIDO ENVIADO", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+               CalculoCajas();
                pedido.setText("");
                resultado.setText("");
            } catch (IOException ex) {
@@ -179,7 +181,7 @@ public class Envios extends javax.swing.JDialog {
         int lar = 0,anch = 0,alt = 0;
         int n = 0;
         int numeroCaja = 0;
-        int unidadesCajas = 0;
+        
         try{
         producto = new Archivos.Salida(num); //productos
         
@@ -191,6 +193,7 @@ public class Envios extends javax.swing.JDialog {
             while(true)
             {
                 resultado.append("  Producto nº: "+n+"\n  Descripcion: "+producto.DescripcionPedido(n)+"\n    Alto: "+producto.altura()+"   Ancho: "+producto.anchura()+" Largo: "+producto.largura()+ "\n  Cantidad: "+producto.cantidad()+"\n");
+                unidadesCajas+= Integer.parseInt(producto.cantidad().trim());
                 n++;
             }
           
@@ -214,6 +217,11 @@ public class Envios extends javax.swing.JDialog {
         int num = Integer.parseInt(pedidos); //numero de pedido
         //producto = new Archivos.Salida(num); //productos
         cajas = new Archivos.SalidaCajas();
+        int contador = 0;
+        System.out.println("NUMERO DE PEDIDOS TOTAL "+unidadesCajas);
+       // int altoProducto = Integer.parseInt(producto.altura().trim());
+       // int altoCaja = Integer.parseInt(cajas.altura().trim());
+       
         
         
     

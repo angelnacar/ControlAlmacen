@@ -184,6 +184,7 @@ public class Pedidos extends javax.swing.JDialog {
         String unidades = (String)cantidad.getSelectedItem();
         try {
             salida2.Descripcion(item);
+            
         } catch (IOException ex) {
             
         }
@@ -213,6 +214,7 @@ public class Pedidos extends javax.swing.JDialog {
         String alto=tabla.getValueAt(i, 3).toString();
         String cantidad=tabla.getValueAt(i, 4).toString();
             try {
+                System.out.println("CANTIDAD GUARDADA "+cantidad+" altura "+alto+" LARGO "+largo);
                 entrada = new Archivos.Entrada(descripcion,largo,ancho,alto,cantidad,Integer.parseInt(numeroPedido.trim())+1);
             } catch (IOException ex) {
                 Logger.getLogger(Pedidos.class.getName()).log(Level.SEVERE, null, ex);
