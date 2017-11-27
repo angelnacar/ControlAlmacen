@@ -147,9 +147,10 @@ public class Envios extends javax.swing.JDialog {
                escribir.write(pedido.getText());
                escribir.newLine(); //salto de linea
                escribir.close();
+               CalculoCajas();
                JOptionPane aviso = new JOptionPane();
                JOptionPane.showMessageDialog(aviso, "PEDIDO ENVIADO", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-               CalculoCajas();
+               
                pedido.setText("");
                resultado.setText("");
            } catch (IOException ex) {
@@ -216,61 +217,42 @@ public class Envios extends javax.swing.JDialog {
      */
     public static void CalculoCajas()
     {
-       int n = 0;
-       
-       int contadorNumerico =0;
-        String contador = listaProductos.get(0).cantidad();
-        contadorNumerico = Integer.parseInt(contador.trim());
-       
-           
+      
            int caja = 0;
            int producto = 0;
            
        
-           while(unidadesCajas >= 0)
+           while(unidadesCajas >= 0) //itera mientras queden productos por meter
                {
                    
            try {
                listaCajas.get(0).Construye(caja);
-                 //System.out.println("VALOR PRODUCTO "+producto);
-                // System.out.println("VALOR CAJA "+caja);
-               //System.out.println("NUMERO "+listaProductos.get(0).DescripcionPedido(producto));
-              // System.out.println("UNIDADES CAJAS   "+unidadesCajas);
                listaProductos.get(0).DescripcionPedido(producto);
                
                if(Integer.parseInt(listaProductos.get(0).altura().trim()) <= Integer.parseInt(listaCajas.get(0).altura().trim()) && Integer.parseInt(listaProductos.get(0).anchura().trim())*Integer.parseInt(listaProductos.get(0).cantidad().trim()) <= Integer.parseInt(listaCajas.get(0).anchura().trim()) && Integer.parseInt(listaProductos.get(0).largura().trim())*Integer.parseInt(listaProductos.get(0).cantidad().trim()) <= Integer.parseInt(listaCajas.get(0).largura().trim()))
-                           {
-                               System.out.println("NECESITA "+1+ " CAJAS CON: ALTURA: "+listaCajas.get(0).altura()+" ANCHURA: "+listaCajas.get(0).anchura()+" LARGO "+listaCajas.get(0).largura());
-                               System.out.println("PRODUCTO "+listaProductos.get(0).DescripcionPedido(producto)+" ALTURA "+listaProductos.get(0).altura()+" ANCHURA "+listaProductos.get(0).anchura()+" LARGO "+listaProductos.get(0).largura()+" CANTIDAD "+listaProductos.get(0).cantidad());
-                               producto++;
-                               listaProductos.get(0).DescripcionPedido(producto);
-                               
-                               unidadesCajas--;
-                               caja = 0;
-                              
-                               
-                           }
-                           else 
-                           {
-                               caja++;
-                               //listaCajas.get(0).Construye(caja);
-                                //System.out.println("NO LO ES");
-                               //System.out.println("NECESITA "+unidadesCajas+ " CAJAS CON: ALTURA: "+listaCajas.get(0).altura()+" ANCHURA: "+listaCajas.get(0).anchura()+" LARGO "+listaCajas.get(0).largura());
-                              // System.out.println("PRODUCTO "+listaProductos.get(0).DescripcionPedido(producto)+" ALTURA "+listaProductos.get(0).altura()+" ANCHURA "+listaProductos.get(0).anchura()+" LARGO "+listaProductos.get(0).largura()+" CANTIDAD "+listaProductos.get(0).cantidad());
-                                //unidadesCajas++;
-                                
-                           }
+                {
+                   JOptionPane aviso = new JOptionPane();
+                   JOptionPane.showMessageDialog(aviso ,"NECESITA "+1+ " CAJA DE : LARGO "+listaCajas.get(0).largura()+" x ANCHO: "+listaCajas.get(0).anchura()+" x ALTO "+listaCajas.get(0).altura(), "CAJAS",JOptionPane.INFORMATION_MESSAGE);
+                   System.out.println("NECESITA "+1+ " CAJAS CON: ALTURA: "+listaCajas.get(0).altura()+" ANCHURA: "+listaCajas.get(0).anchura()+" LARGO "+listaCajas.get(0).largura());
+                   System.out.println("PRODUCTO "+listaProductos.get(0).DescripcionPedido(producto)+" ALTURA "+listaProductos.get(0).altura()+" ANCHURA "+listaProductos.get(0).anchura()+" LARGO "+listaProductos.get(0).largura()+" CANTIDAD "+listaProductos.get(0).cantidad());
+                   producto++; //avanza al siguiente producto
+                   listaProductos.get(0).DescripcionPedido(producto); // inicializa siguiente producto
+                   unidadesCajas--;
+                   caja = 0; // vuelve a la caja más pequeña
+                }
+                else 
+                 {
+                   caja++;
+                 }
                
            } catch (IOException ex) {
-              
-              //caja = 0;
+             
               break;
-              
            }
            
            
               }
-     }
+  }
     
     /**
      * Guarda en fichero el numero de pedido enviado
