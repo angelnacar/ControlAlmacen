@@ -32,7 +32,7 @@ public class SalidaCajas {
     
     
     /**
-     * Deveuelve los datos de cada producto
+     * Deveuelve los datos de cada embalaje
      * @param n
      * @return
      * @throws EOFException
@@ -50,13 +50,13 @@ public class SalidaCajas {
         
         acceso.seek(n*24);
        
-        for(int k = 0;k<alt.length;k++)
+        for(int k = 0;k<lar.length;k++)
         {
             aux2 = acceso.readChar();
             lar[k] = aux2;
         }
         
-        for(int m = 0;m<alt.length;m++)
+        for(int m = 0;m<an.length;m++)
         {
             aux3 = acceso.readChar();
             an[m] = aux3;

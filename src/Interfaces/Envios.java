@@ -4,12 +4,14 @@ package Interfaces;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.DataOutputStream;
+import java.io.EOFException;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -23,11 +25,16 @@ public class Envios extends javax.swing.JDialog {
     static Calculos.Cajas caja;
     static Archivos.SalidaCajas cajas;
     static int unidadesCajas = 0;
+    static ArrayList<Archivos.Salida> listaProductos;
+    static ArrayList<Archivos.SalidaCajas> listaCajas;
     
     
     public Envios(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        cajas = new Archivos.SalidaCajas(); //inicializa objeto caja
+        listaCajas = new ArrayList();
+        listaCajas.add(cajas); 
     }
 
     
@@ -175,16 +182,12 @@ public class Envios extends javax.swing.JDialog {
     public static void Imprime() throws NumberFormatException
     {
         String pedidos = pedido.getText();
-        int num = Integer.parseInt(pedidos); //numero de pedido
-       
-        cajas = new Archivos.SalidaCajas();
-        int lar = 0,anch = 0,alt = 0;
+        int num = Integer.parseInt(pedidos); //numero de pedido, inicializa el pedido que pasa el usuario
         int n = 0;
-        int numeroCaja = 0;
-        
         try{
         producto = new Archivos.Salida(num); //productos
-        
+        listaProductos = new ArrayList();
+        listaProductos.add(producto); //guarda en un array el pedido que se va a enviar
         
         try {
              
@@ -197,7 +200,7 @@ public class Envios extends javax.swing.JDialog {
                 n++;
             }
           
-        } catch (IOException ex) {
+        } catch (IOException ex) { //finaliza la lectura del archivo
             
             resultado.append("----------------------- FIN PEDIDO -------------------------------");
         }
@@ -213,19 +216,64 @@ public class Envios extends javax.swing.JDialog {
      */
     public static void CalculoCajas()
     {
-        String pedidos = pedido.getText();
-        int num = Integer.parseInt(pedidos); //numero de pedido
-        //producto = new Archivos.Salida(num); //productos
-        cajas = new Archivos.SalidaCajas();
-        int contador = 0;
-        System.out.println("NUMERO DE PEDIDOS TOTAL "+unidadesCajas);
-       // int altoProducto = Integer.parseInt(producto.altura().trim());
-       // int altoCaja = Integer.parseInt(cajas.altura().trim());
+       int n = 0;
        
-        
-        
-    
-    }
+       int contadorNumerico =0;
+        String contador = listaProductos.get(0).cantidad();
+        contadorNumerico = Integer.parseInt(contador.trim());
+       
+           
+           int caja = 0;
+           int producto = 0;
+           int unidadesCajas = 1; //controla el numero de cajas de la misma medida
+       
+           while(unidadesCajas > 0)
+               {
+                   
+           try {
+               listaCajas.get(0).Construye(caja);
+                    try{
+               
+               listaProductos.get(0).DescripcionPedido(producto);
+               
+               if(Integer.parseInt(listaProductos.get(0).altura().trim()) <= Integer.parseInt(listaCajas.get(0).altura().trim()) && Integer.parseInt(listaProductos.get(0).anchura().trim())*Integer.parseInt(listaProductos.get(0).cantidad().trim()) <= Integer.parseInt(listaCajas.get(0).anchura().trim()) && Integer.parseInt(listaProductos.get(0).largura().trim())*Integer.parseInt(listaProductos.get(0).cantidad().trim()) <= Integer.parseInt(listaCajas.get(0).largura().trim()))
+                           {
+                               System.out.println("NECESITA "+unidadesCajas+ " CAJAS CON: ALTURA: "+listaCajas.get(0).altura()+" ANCHURA: "+listaCajas.get(0).anchura()+" LARGO "+listaCajas.get(0).largura());
+                               System.out.println("PRODUCTO "+listaProductos.get(0).DescripcionPedido(producto)+" ALTURA "+listaProductos.get(0).altura()+" ANCHURA "+listaProductos.get(0).anchura()+" LARGO "+listaProductos.get(0).largura()+" CANTIDAD "+listaProductos.get(0).cantidad());
+                               producto++;
+                               listaProductos.get(0).DescripcionPedido(producto);
+                               unidadesCajas--;
+                               
+                              
+                               
+                           }
+                           else 
+                           {
+                               caja++;
+                               //listaCajas.get(0).Construye(caja);
+                                //System.out.println("NO LO ES");
+                               //System.out.println("NECESITA "+unidadesCajas+ " CAJAS CON: ALTURA: "+listaCajas.get(0).altura()+" ANCHURA: "+listaCajas.get(0).anchura()+" LARGO "+listaCajas.get(0).largura());
+                              // System.out.println("PRODUCTO "+listaProductos.get(0).DescripcionPedido(producto)+" ALTURA "+listaProductos.get(0).altura()+" ANCHURA "+listaProductos.get(0).anchura()+" LARGO "+listaProductos.get(0).largura()+" CANTIDAD "+listaProductos.get(0).cantidad());
+                                //unidadesCajas++;
+                                
+                           }
+               
+           } catch (IOException ex) {
+               //caja = 0;
+               //producto = 0;
+               System.out.println("PETA PRODUCTOS");
+              break;
+              
+           }
+           }catch(IOException e)
+           {
+           System.out.println("PETA CAJAS");
+           break;
+              
+           }
+           
+              }
+     }
     
     /**
      * Guarda en fichero el numero de pedido enviado
