@@ -114,7 +114,7 @@ public class Salida {
             aux = acceso.readChar();
             nombre[i] = aux;
           }
-        for(int k = 0;k<alt.length;k++)
+        for(int k = 0;k<lar.length;k++)
         {
             aux2 = acceso.readChar();
             lar[k] = aux2;
@@ -126,10 +126,10 @@ public class Salida {
             an[m] = aux3;
         }
         
-        for(int z = 0;z<lar.length;z++)
+        for(int z = 0;z<alt.length;z++)
         {
             aux4 = acceso.readChar();
-            lar[z] = aux4;
+            alt[z] = aux4;
         }
         for(int s = 0;s<can.length;s++)
         {
