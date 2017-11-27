@@ -42,7 +42,7 @@ public class Salida {
     }
     
     /**
-     * Deveuelve los datos de cada producto
+     * Deveuelve los datos de cada producto del fichero productos
      * @param n
      * @return
      * @throws EOFException
@@ -91,7 +91,7 @@ public class Salida {
    }
     
     /**
-     * devuelve los datos de cada producto con la cantidad pedida
+     * devuelve los datos de cada producto con la cantidad pedida del fichero pedidos
      * @param n
      * @return
      * @throws EOFException

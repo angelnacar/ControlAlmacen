@@ -225,25 +225,28 @@ public class Envios extends javax.swing.JDialog {
            
            int caja = 0;
            int producto = 0;
-           int unidadesCajas = 1; //controla el numero de cajas de la misma medida
+           
        
-           while(unidadesCajas > 0)
+           while(unidadesCajas >= 0)
                {
                    
            try {
                listaCajas.get(0).Construye(caja);
-                    try{
-               
+                 //System.out.println("VALOR PRODUCTO "+producto);
+                // System.out.println("VALOR CAJA "+caja);
+               //System.out.println("NUMERO "+listaProductos.get(0).DescripcionPedido(producto));
+              // System.out.println("UNIDADES CAJAS   "+unidadesCajas);
                listaProductos.get(0).DescripcionPedido(producto);
                
                if(Integer.parseInt(listaProductos.get(0).altura().trim()) <= Integer.parseInt(listaCajas.get(0).altura().trim()) && Integer.parseInt(listaProductos.get(0).anchura().trim())*Integer.parseInt(listaProductos.get(0).cantidad().trim()) <= Integer.parseInt(listaCajas.get(0).anchura().trim()) && Integer.parseInt(listaProductos.get(0).largura().trim())*Integer.parseInt(listaProductos.get(0).cantidad().trim()) <= Integer.parseInt(listaCajas.get(0).largura().trim()))
                            {
-                               System.out.println("NECESITA "+unidadesCajas+ " CAJAS CON: ALTURA: "+listaCajas.get(0).altura()+" ANCHURA: "+listaCajas.get(0).anchura()+" LARGO "+listaCajas.get(0).largura());
+                               System.out.println("NECESITA "+1+ " CAJAS CON: ALTURA: "+listaCajas.get(0).altura()+" ANCHURA: "+listaCajas.get(0).anchura()+" LARGO "+listaCajas.get(0).largura());
                                System.out.println("PRODUCTO "+listaProductos.get(0).DescripcionPedido(producto)+" ALTURA "+listaProductos.get(0).altura()+" ANCHURA "+listaProductos.get(0).anchura()+" LARGO "+listaProductos.get(0).largura()+" CANTIDAD "+listaProductos.get(0).cantidad());
                                producto++;
                                listaProductos.get(0).DescripcionPedido(producto);
-                               unidadesCajas--;
                                
+                               unidadesCajas--;
+                               caja = 0;
                               
                                
                            }
@@ -259,18 +262,12 @@ public class Envios extends javax.swing.JDialog {
                            }
                
            } catch (IOException ex) {
-               //caja = 0;
-               //producto = 0;
-               System.out.println("PETA PRODUCTOS");
+              
+              //caja = 0;
               break;
               
            }
-           }catch(IOException e)
-           {
-           System.out.println("PETA CAJAS");
-           break;
-              
-           }
+           
            
               }
      }
