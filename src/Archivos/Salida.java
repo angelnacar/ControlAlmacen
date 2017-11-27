@@ -54,9 +54,9 @@ public class Salida {
         
         char aux,aux2,aux3,aux4;
         char nombre[] = new char[20];
-        char alt[] = new char[4];
-        char an[] = new char[4];
         char lar[] = new char[4];
+        char an[] = new char[4];
+        char alt[] = new char[4];
         
         acceso.seek(n*64);
         for(int i = 0;i<nombre.length;i++) //almacena nombre
@@ -64,7 +64,7 @@ public class Salida {
             aux = acceso.readChar();
             nombre[i] = aux;
           }
-        for(int k = 0;k<alt.length;k++)
+        for(int k = 0;k<lar.length;k++)
         {
             aux2 = acceso.readChar();
             lar[k] = aux2;
@@ -76,10 +76,10 @@ public class Salida {
             an[m] = aux3;
         }
         
-        for(int z = 0;z<lar.length;z++)
+        for(int z = 0;z<alt.length;z++)
         {
             aux4 = acceso.readChar();
-            lar[z] = aux4;
+            alt[z] = aux4;
         }
         
         descripcion = new String(nombre);
