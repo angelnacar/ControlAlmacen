@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Interfaces;
 
 import java.io.IOException;
@@ -10,14 +6,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author cursomulti
+ *Clase principal con método main
+ * @author Ángel Nácar
  */
 public class Menu extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Menu
-     */
+    
     public Menu() {
         initComponents();
     }
@@ -28,83 +22,84 @@ public class Menu extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuItem5 = new javax.swing.JMenuItem();
+        altas = new javax.swing.JMenu();
+        embalajes = new javax.swing.JMenuItem();
+        productos = new javax.swing.JMenuItem();
+        pedidos = new javax.swing.JMenuItem();
+        consultas = new javax.swing.JMenu();
+        consultar = new javax.swing.JMenuItem();
+        envios = new javax.swing.JMenu();
+        enviar = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("MENU");
         setMaximumSize(new java.awt.Dimension(600, 400));
         setMinimumSize(new java.awt.Dimension(600, 400));
         setResizable(false);
+        setType(java.awt.Window.Type.POPUP);
 
         jMenuBar1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jMenuBar1.setForeground(new java.awt.Color(0, 153, 204));
 
-        jMenu1.setText("ALTAS");
-        jMenu1.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        altas.setText("ALTAS");
+        altas.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
 
-        jMenuItem1.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
-        jMenuItem1.setText("EMBALAJES");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        embalajes.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        embalajes.setText("EMBALAJES");
+        embalajes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                embalajesActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        altas.add(embalajes);
 
-        jMenuItem2.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
-        jMenuItem2.setText("PRODUCTOS");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        productos.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        productos.setText("PRODUCTOS");
+        productos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                productosActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem2);
+        altas.add(productos);
 
-        jMenuItem3.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
-        jMenuItem3.setText("PEDIDOS");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        pedidos.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        pedidos.setText("PEDIDOS");
+        pedidos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                pedidosActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem3);
+        altas.add(pedidos);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(altas);
 
-        jMenu2.setText("CONSULTAS");
-        jMenu2.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        consultas.setText("CONSULTAS");
+        consultas.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
 
-        jMenuItem4.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
-        jMenuItem4.setText("CONSULTAR");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+        consultar.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        consultar.setText("CONSULTAR");
+        consultar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+                consultarActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem4);
+        consultas.add(consultar);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(consultas);
 
-        jMenu3.setText("ENVIOS");
-        jMenu3.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        envios.setText("ENVIOS");
+        envios.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
 
-        jMenuItem5.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
-        jMenuItem5.setText("ENVIAR");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+        enviar.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        enviar.setText("ENVIAR");
+        enviar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
+                enviarActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem5);
+        envios.add(enviar);
 
-        jMenuBar1.add(jMenu3);
+        jMenuBar1.add(envios);
 
         setJMenuBar(jMenuBar1);
 
@@ -120,20 +115,21 @@ public class Menu extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void embalajesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_embalajesActionPerformed
        Embalajes embalaje = new Embalajes(this,true);
        embalaje.setVisible(true);
         
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_embalajesActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void productosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productosActionPerformed
         Productos producto = new Productos(this,true);
         producto.setVisible(true);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_productosActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void pedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pedidosActionPerformed
         Pedidos pedido;
         try {
             pedido = new Pedidos(this,true);
@@ -142,17 +138,17 @@ public class Menu extends javax.swing.JFrame {
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }//GEN-LAST:event_pedidosActionPerformed
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+    private void consultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarActionPerformed
         Consultas consulta = new Consultas(this,true);
         consulta.setVisible(true);
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
+    }//GEN-LAST:event_consultarActionPerformed
 
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+    private void enviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarActionPerformed
         Envios envio = new Envios(this,true);
         envio.setVisible(true);
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
+    }//GEN-LAST:event_enviarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -190,14 +186,14 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu altas;
+    private javax.swing.JMenuItem consultar;
+    private javax.swing.JMenu consultas;
+    private javax.swing.JMenuItem embalajes;
+    private javax.swing.JMenuItem enviar;
+    private javax.swing.JMenu envios;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem pedidos;
+    private javax.swing.JMenuItem productos;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,12 +1,14 @@
 
 package Interfaces;
 
+import javax.swing.JOptionPane;
+
 /**
- *
- * @author 
+ *  Clase para la creación y almacenaje de nuevos productos
+ * @author Ángel Nácar
  */
 public class Productos extends javax.swing.JDialog {
-      static Archivos.Entrada entrada;
+    private Archivos.Entrada entrada;
     
     public Productos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -118,29 +120,65 @@ public class Productos extends javax.swing.JDialog {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Datos();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    public static void Datos()
+    /**
+     * Instancia un objeto con los datos del producto
+     */
+    private void Datos()
     {
-        
+      try //controla que el usuario meta numeros en medidas
+      {
+        if(Integer.parseInt(largo.getText().trim()) > 20) //controla las medidas de las cajas
+        {
+           JOptionPane aviso = new JOptionPane();
+           JOptionPane.showMessageDialog(aviso, "LARGO MAXIMO 20 CM", "Aviso", JOptionPane.WARNING_MESSAGE);
+        }
+        else if(Integer.parseInt(ancho.getText().trim()) > 20)
+        {
+           JOptionPane aviso = new JOptionPane();
+           JOptionPane.showMessageDialog(aviso, "ANCHO MAXIMO 20 CM", "Aviso", JOptionPane.WARNING_MESSAGE);
+        }
+        else if(Integer.parseInt(altura.getText().trim()) > 30)
+        {
+           JOptionPane aviso = new JOptionPane();
+           JOptionPane.showMessageDialog(aviso, "ALTURA MAXIMO 30 CM", "Aviso", JOptionPane.WARNING_MESSAGE);
+        }
+        else
+        {
         entrada = new Archivos.Entrada(descripcion.getText(),largo.getText(),ancho.getText(),altura.getText());
+        JOptionPane aviso = new JOptionPane();
+        JOptionPane.showMessageDialog(aviso, "PRODUCTO GUARDADO ", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+        altura.setText(""); //limpia los jlabel
+        largo.setText("");
+        ancho.setText("");
+        descripcion.setText("");
+        }
+    
+      }catch(NumberFormatException e)
+       {
+           JOptionPane aviso = new JOptionPane();
+           JOptionPane.showMessageDialog(aviso, "INTRODUZCA NUMEROS EN LAS MEDIDAS", "Aviso", JOptionPane.WARNING_MESSAGE);
+       }
+      
     }
             
   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private static javax.swing.JTextField altura;
-    private static javax.swing.JTextField ancho;
-    private static javax.swing.JTextField descripcion;
+    private javax.swing.JTextField altura;
+    private javax.swing.JTextField ancho;
+    private javax.swing.JTextField descripcion;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private static javax.swing.JTextField largo;
+    private javax.swing.JTextField largo;
     // End of variables declaration//GEN-END:variables
 }

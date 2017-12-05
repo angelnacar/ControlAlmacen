@@ -1,12 +1,15 @@
 
 package Interfaces;
 
+
+import javax.swing.JOptionPane;
+
 /**
- *
+ *  Clase para el almacenamiento de embalajes. Hace una instancia de la clase Entrada 
  * @author angel
  */
 public class Embalajes extends javax.swing.JDialog {
-
+    private Archivos.Entrada entrada;
     
     public Embalajes(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -24,7 +27,7 @@ public class Embalajes extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         altura = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        guardar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("EMBALAJES");
@@ -44,10 +47,10 @@ public class Embalajes extends javax.swing.JDialog {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("ALTURA");
 
-        jButton1.setText("GUARDAR");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        guardar.setText("GUARDAR");
+        guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                guardarActionPerformed(evt);
             }
         });
 
@@ -71,7 +74,7 @@ public class Embalajes extends javax.swing.JDialog {
                 .addGap(49, 49, 49))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34))
         );
         layout.setVerticalGroup(
@@ -90,26 +93,67 @@ public class Embalajes extends javax.swing.JDialog {
                     .addComponent(altura, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(29, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
+        Datos();
+    }//GEN-LAST:event_guardarActionPerformed
 
+    /**
+     * Guarda datos en embalajes y controla que las medidas no superen un tope
+     */
+    private  void Datos()
+    {
+        try //controla que el usuario meta numeros en medidas
+      {
+        if(Integer.parseInt(largo.getText().trim()) > 40) //controla las medidas de las cajas
+        {
+           JOptionPane aviso = new JOptionPane();
+           JOptionPane.showMessageDialog(aviso, "LARGO MAXIMO 40 CM", "Aviso", JOptionPane.WARNING_MESSAGE);
+        }
+        else if(Integer.parseInt(ancho.getText().trim()) > 30)
+        {
+           JOptionPane aviso = new JOptionPane();
+           JOptionPane.showMessageDialog(aviso, "ANCHO MAXIMO 20 CM", "Aviso", JOptionPane.WARNING_MESSAGE);
+        }
+        else if(Integer.parseInt(altura.getText().trim()) > 30)
+        {
+           JOptionPane aviso = new JOptionPane();
+           JOptionPane.showMessageDialog(aviso, "ALTURA MAXIMO 30 CM", "Aviso", JOptionPane.WARNING_MESSAGE);
+        }
+        else
+        {
+         entrada = new Archivos.Entrada(largo.getText(),ancho.getText(),altura.getText()); //instancia la clase entrada con el constructor de acceso a archivo de productos
+        JOptionPane aviso = new JOptionPane();
+        JOptionPane.showMessageDialog(aviso, "EMBALAJE GUARDADO ", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+        altura.setText(""); //limpia los jlabel
+        largo.setText("");
+        ancho.setText("");
+        
+        }
+    
+      }catch(NumberFormatException e)
+       {
+           JOptionPane aviso = new JOptionPane();
+           JOptionPane.showMessageDialog(aviso, "INTRODUZCA NUMEROS EN LAS MEDIDAS", "Aviso", JOptionPane.WARNING_MESSAGE);
+       }
+       
+    }
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private static javax.swing.JTextField altura;
-    private static javax.swing.JTextField ancho;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JTextField altura;
+    private javax.swing.JTextField ancho;
+    private javax.swing.JButton guardar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private static javax.swing.JTextField largo;
+    private javax.swing.JTextField largo;
     // End of variables declaration//GEN-END:variables
 }
